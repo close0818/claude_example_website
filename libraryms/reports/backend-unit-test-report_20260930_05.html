@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#17372e">
+<title>Backend 單元測試報告｜2026-09-30 05</title>
+<style>
+:root{color-scheme:light;--ink:#20332c;--muted:#6f7f76;--paper:#fff;--canvas:#f2f4ef;--line:#dfe5dc;--green:#2f6d55;--green-dark:#234f3f;--mint:#e9f1e9;--coral:#a74c36;--coral-bg:#fff0eb;--gold:#946414;--gold-bg:#fff6df;--blue:#426b7b;--blue-bg:#eaf2f4;--font:"Aptos","Segoe UI","Noto Sans TC",sans-serif;--mono:"Cascadia Code","Consolas",monospace}
+*{box-sizing:border-box}body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--font);font-size:15px;line-height:1.65}.page{width:min(100% - 40px,1050px);margin:34px auto 64px}.masthead{display:flex;justify-content:space-between;align-items:center;padding-bottom:16px;border-bottom:1px solid var(--line);color:var(--muted);font-size:12px;letter-spacing:.09em;text-transform:uppercase}.brand{display:flex;align-items:center;gap:10px;color:var(--ink);font-weight:700}.brand-mark{width:28px;height:28px;display:grid;place-items:center;border-radius:8px 8px 8px 3px;background:var(--green);color:white;font-size:14px}.date{font-family:var(--mono);letter-spacing:0}.hero{padding:34px 0 26px}.eyebrow{color:var(--green);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}.hero h1{max-width:800px;margin:8px 0 10px;font-size:clamp(30px,5vw,48px);line-height:1.15;letter-spacing:0}.hero p{max-width:720px;margin:0;color:var(--muted);font-size:16px}.summary{display:flex;align-items:flex-start;gap:12px;margin:4px 0 22px;padding:15px 17px;border-left:4px solid var(--green);border-radius:0 7px 7px 0;background:#e9f1e9;color:#345247}.summary strong{display:block;margin-bottom:3px;color:#234f3f}.summary span{font-size:13px}.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:0 0 30px}.metric{min-height:105px;padding:15px 16px;border:1px solid var(--line);border-radius:8px;background:var(--paper)}.metric-label{color:var(--muted);font-size:11px;font-weight:700;letter-spacing:.06em}.metric-value{margin-top:5px;font-size:27px;font-weight:700;line-height:1.2}.metric-note{margin-top:4px;color:var(--muted);font-size:11px}.pass{color:var(--green)}.warn{color:var(--gold)}.blocked{color:var(--coral)}section{margin-top:27px}.section-heading{display:flex;align-items:baseline;justify-content:space-between;gap:14px;margin-bottom:12px}h2{margin:0;font-size:21px;line-height:1.3;letter-spacing:0}.section-note{color:var(--muted);font-size:11px}.panel{overflow:hidden;border:1px solid var(--line);border-radius:8px;background:var(--paper)}table{width:100%;border-collapse:collapse;text-align:left}th{padding:10px 13px;background:#f7f9f5;color:var(--muted);font-size:11px;font-weight:700}td{padding:10px 13px;border-top:1px solid #edf0eb;font-size:13px;vertical-align:top}td:first-child{width:27%;font-weight:600}td:nth-child(2){width:17%}.status{display:inline-flex;align-items:center;gap:6px;white-space:nowrap;font-size:11px;font-weight:700}.status:before{width:7px;height:7px;border-radius:50%;background:currentColor;content:""}.status-ok{color:var(--green)}.status-no{color:var(--gold)}.env-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.env-card{padding:15px 17px;border:1px solid var(--line);border-radius:8px;background:var(--paper)}.env-card h3{margin:0 0 8px;font-size:14px}.env-card p{margin:0;color:var(--muted);font-size:12px}.env-card code,.scope code,td code{font-family:var(--mono);font-size:.92em}.risk-list{display:grid;gap:10px}.risk{display:grid;grid-template-columns:52px 1fr;gap:12px;padding:14px 16px;border:1px solid var(--line);border-radius:8px;background:var(--paper)}.priority{align-self:start;padding:4px 7px;border-radius:4px;background:var(--coral-bg);color:var(--coral);text-align:center;font-size:10px;font-weight:800;letter-spacing:.05em}.priority.p2{background:var(--gold-bg);color:var(--gold)}.risk strong{display:block;margin-bottom:3px;font-size:14px}.risk p{margin:0;color:var(--muted);font-size:12px}.scope{padding:15px 17px;border:1px solid #d4e1e3;border-radius:8px;background:var(--blue-bg);color:#3e5b65;font-size:13px}.scope strong{display:block;margin-bottom:5px;color:#2e535f}.improvements{counter-reset:step;display:grid;gap:9px}.improvement{display:grid;grid-template-columns:28px 1fr;gap:10px;padding:11px 14px;border:1px solid var(--line);border-radius:7px;background:var(--paper)}.improvement:before{counter-increment:step;content:counter(step,decimal-leading-zero);color:var(--green);font:700 12px var(--mono);padding-top:2px}.improvement strong{display:block;margin-bottom:2px;font-size:13px}.improvement p{margin:0;color:var(--muted);font-size:12px}.commands{padding:13px 16px;border-radius:7px;background:#17372e;color:#eaf1e7;font:12px/1.9 var(--mono);white-space:pre-wrap}.footer{display:flex;justify-content:space-between;gap:16px;margin-top:28px;padding-top:14px;border-top:1px solid var(--line);color:var(--muted);font-size:11px}.print-button{position:fixed;right:22px;bottom:22px;padding:10px 14px;border:0;border-radius:6px;background:var(--green);color:white;font:600 12px var(--font);box-shadow:0 5px 18px #20332c2b;cursor:pointer}.print-button:hover{background:var(--green-dark)}
+@media(max-width:720px){.page{width:min(100% - 26px,1050px);margin-top:18px}.masthead{font-size:10px}.hero{padding-top:26px}.hero p{font-size:14px}.metrics{grid-template-columns:1fr 1fr;gap:8px}.metric{min-height:94px;padding:12px}.metric-value{font-size:24px}.section-heading{align-items:flex-start;flex-direction:column;gap:2px}h2{font-size:19px}.panel{overflow-x:auto}table{min-width:640px}.env-grid{grid-template-columns:1fr}.footer{flex-direction:column;gap:4px}.print-button{right:12px;bottom:12px}}
+@media print{@page{size:A4;margin:16mm}body{background:#fff;font-size:11px}.page{width:100%;margin:0}.masthead{padding-bottom:8px}.hero{padding:20px 0 15px}.hero h1{font-size:29px}.hero p{font-size:12px}.metrics{gap:7px;margin-bottom:18px}.metric{min-height:75px;padding:9px 10px}.metric-value{font-size:20px}.metric-note{font-size:9px}section{margin-top:17px}h2{font-size:16px}.panel,.env-card,.risk,.improvement,.scope{break-inside:avoid}td{padding:6px 8px;font-size:10px}th{padding:7px 8px;font-size:9px}.print-button{display:none}.footer{margin-top:18px}}
+</style>
+</head>
+<body>
+<main class="page">
+  <header class="masthead"><div class="brand"><span class="brand-mark">L</span>LibraryMS · 後端品質驗證</div><div class="date">2026-09-30 · 05 時</div></header>
+  <div class="hero"><div class="eyebrow">Backend Unit Test Report</div><h1>單元測試報告</h1><p>檢視 Go backend handler 的輸入驗證、資料存取、交易行為與目前品質保護範圍。</p></div>
+  <div class="summary"><div><strong>結果：測試通過，覆蓋仍需擴大</strong><span>新增的 11 個 handler 測項全數通過。SQL mock 可驗證 API 與交易流程，但不能取代真實 MySQL 的初始化和併發整合測試。</span></div></div>
+  <div class="metrics" aria-label="測試摘要">
+    <article class="metric"><div class="metric-label">單元測試</div><div class="metric-value pass">11 / 11</div><div class="metric-note">go test ./... -v -cover</div></article>
+    <article class="metric"><div class="metric-label">HANDLER STATEMENT COVERAGE</div><div class="metric-value">39.8%</div><div class="metric-note">其餘 package 尚無測試</div></article>
+    <article class="metric"><div class="metric-label">BUILD / VET</div><div class="metric-value pass">通過</div><div class="metric-note">go build ./... · go vet ./...</div></article>
+    <article class="metric"><div class="metric-label">RACE DETECTOR</div><div class="metric-value blocked">未能驗證</div><div class="metric-note">Windows 程序結束碼 0xc0000139</div></article>
+  </div>
+
+  <section>
+    <div class="section-heading"><h2>測試案例</h2><span class="section-note">位置：backend/internal/handlers/handlers_test.go</span></div>
+    <div class="panel"><table><thead><tr><th>案例</th><th>結果</th><th>驗證內容</th></tr></thead><tbody>
+      <tr><td>TestHealth</td><td><span class="status status-ok">通過</span></td><td>健康端點回傳 HTTP 200 與正常狀態。</td></tr>
+      <tr><td>TestCreateBookRejectsMissingFields</td><td><span class="status status-ok">通過</span></td><td>缺少必要欄位時回傳 HTTP 400。</td></tr>
+      <tr><td>TestCreateBookTrimsFieldsAndDefaultsStatus</td><td><span class="status status-ok">通過</span></td><td>欄位去除空白、預設狀態，並驗證新增與讀回。</td></tr>
+      <tr><td>TestCreateMemberTrimsFields</td><td><span class="status status-ok">通過</span></td><td>會員欄位去除空白並驗證新增結果。</td></tr>
+      <tr><td>TestBorrowBookRejectsUnavailableBook</td><td><span class="status status-ok">通過</span></td><td>不可借閱書籍回傳 HTTP 409。</td></tr>
+      <tr><td>TestBorrowBookCommitsTransaction</td><td><span class="status status-ok">通過</span></td><td>成功建立借閱並提交交易。</td></tr>
+      <tr><td>TestBorrowBookRollsBackWhenBookUpdateFails</td><td><span class="status status-ok">通過</span></td><td>更新書籍狀態失敗時回傳錯誤並 rollback。</td></tr>
+      <tr><td>TestReturnBookCommitsTransaction</td><td><span class="status status-ok">通過</span></td><td>歸還作業更新借閱與書籍狀態並提交交易。</td></tr>
+      <tr><td>TestListBooksReturnsRows</td><td><span class="status status-ok">通過</span></td><td>列表資料正確序列化回傳。</td></tr>
+      <tr><td>TestGetStatsReturnsCounts</td><td><span class="status status-ok">通過</span></td><td>五種館務統計值正確回傳。</td></tr>
+      <tr><td>TestDeleteBookReturnsNotFoundWhenNoRowsAffected</td><td><span class="status status-ok">通過</span></td><td>找不到刪除對象時回傳 HTTP 404。</td></tr>
+    </tbody></table></div>
+  </section>
+
+  <section>
+    <div class="section-heading"><h2>執行環境與限制</h2><span class="section-note">報告時間：2026 年 9 月 30 日 05 時</span></div>
+    <div class="env-grid">
+      <article class="env-card"><h3>單元測試隔離</h3><p>使用 <code>go-sqlmock</code> 驗證 handler 的 SQL 呼叫、參數、HTTP 回應和交易期望；不連線、不寫入實際 MySQL 資料。</p></article>
+      <article class="env-card"><h3>Race detector 未完成</h3><p><code>go test -race ./...</code> 的測試程序以 Windows 結束碼 <code>0xc0000139</code> 中止，沒有產生 race 結果。這不是測到競態，也不能列為通過。</p></article>
+    </div>
+    <div class="scope" style="margin-top:12px"><strong>目前未涵蓋</strong><span>db.Open 的資料庫/Schema 建立、真實 MySQL 權限與重啟行為、借閱併發競態、圖書更新/單筆查詢、會員與借閱列表、SQL 錯誤及 rows.Err() 分支。其他 package 目前沒有測試。</span></div>
+  </section>
+
+  <section>
+    <div class="section-heading"><h2>品質改善建議</h2><span class="section-note">依風險排序</span></div>
+    <div class="risk-list">
+      <article class="risk"><span class="priority">P1</span><div><strong>確保借閱資料一致性</strong><p>改用條件式原子更新或 row lock，檢查受影響列數，並用併發測試保證同一本書不會重複借出。</p></div></article>
+      <article class="risk"><span class="priority">P1</span><div><strong>以隔離 MySQL 驗證首次初始化</strong><p>測試自動建庫、逐表建置、權限不足時 fail fast，以及重複啟動不破壞資料。</p></div></article>
+      <article class="risk"><span class="priority">P1</span><div><strong>建立 API 安全邊界</strong><p>加入認證與角色授權、限制 CORS 來源，資料庫改用最小權限帳號並透過 secret 注入憑證。</p></div></article>
+      <article class="risk"><span class="priority p2">P2</span><div><strong>擴大 handler 測試和錯誤路徑</strong><p>補齊讀取/更新、無效 ID、SQL 故障、掃描失敗與 rows.Err() 測試，統一錯誤狀態碼。</p></div></article>
+      <article class="risk"><span class="priority p2">P2</span><div><strong>建立自動化品質門檻</strong><p>在 CI 執行 gofmt 檢查、go vet、go test、可用平台上的 race test，並逐步提高 coverage 門檻。</p></div></article>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-heading"><h2>重現指令</h2><span class="section-note">在 backend/ 目錄執行</span></div>
+    <div class="commands">go test ./... -v -cover
+go build ./...
+go vet ./...
+go test -race ./...  # 本次 Windows 環境未能完成</div>
+  </section>
+
+  <footer class="footer"><span>LibraryMS · Backend Quality</span><span>測試報告 · 2026-09-30 05</span></footer>
+</main>
+<button class="print-button" type="button" onclick="window.print()" aria-label="列印或匯出 PDF">列印 / 匯出 PDF</button>
+</body>
+</html>

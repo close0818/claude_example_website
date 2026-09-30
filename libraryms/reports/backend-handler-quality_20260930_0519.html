@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#17372e">
+<title>Backend Handler 品質改善與測試報告｜2026-09-30 05:19</title>
+<style>
+:root{color-scheme:light;--ink:#20332c;--muted:#6f7f76;--paper:#fff;--canvas:#f2f4ef;--line:#dfe5dc;--green:#2f6d55;--green-dark:#234f3f;--mint:#e9f1e9;--coral:#a74c36;--coral-bg:#fff0eb;--gold:#946414;--gold-bg:#fff6df;--blue:#426b7b;--blue-bg:#eaf2f4;--font:"Aptos","Segoe UI","Noto Sans TC",sans-serif;--mono:"Cascadia Code","Consolas",monospace}
+*{box-sizing:border-box}body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--font);font-size:15px;line-height:1.65}.page{width:min(100% - 40px,1050px);margin:34px auto 64px}.masthead{display:flex;justify-content:space-between;align-items:center;padding-bottom:16px;border-bottom:1px solid var(--line);color:var(--muted);font-size:12px;letter-spacing:.09em;text-transform:uppercase}.brand{display:flex;align-items:center;gap:10px;color:var(--ink);font-weight:700}.brand-mark{width:28px;height:28px;display:grid;place-items:center;border-radius:8px 8px 8px 3px;background:var(--green);color:white;font-size:14px}.date{font-family:var(--mono);letter-spacing:0}.hero{padding:34px 0 26px}.eyebrow{color:var(--green);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}.hero h1{max-width:800px;margin:8px 0 10px;font-size:clamp(30px,5vw,48px);line-height:1.15;letter-spacing:0}.hero p{max-width:720px;margin:0;color:var(--muted);font-size:16px}.summary{display:flex;align-items:flex-start;gap:12px;margin:4px 0 22px;padding:15px 17px;border-left:4px solid var(--green);border-radius:0 7px 7px 0;background:var(--mint);color:#345247}.summary strong{display:block;margin-bottom:3px;color:var(--green-dark)}.summary span{font-size:13px}.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:0 0 30px}.metric{min-height:105px;padding:15px 16px;border:1px solid var(--line);border-radius:8px;background:var(--paper)}.metric-label{color:var(--muted);font-size:11px;font-weight:700;letter-spacing:.06em}.metric-value{margin-top:5px;font-size:27px;font-weight:700;line-height:1.2}.metric-note{margin-top:4px;color:var(--muted);font-size:11px}.pass{color:var(--green)}.warn{color:var(--gold)}.blocked{color:var(--coral)}section{margin-top:27px}.section-heading{display:flex;align-items:baseline;justify-content:space-between;gap:14px;margin-bottom:12px}h2{margin:0;font-size:21px;line-height:1.3;letter-spacing:0}.section-note{color:var(--muted);font-size:11px}.panel{overflow:hidden;border:1px solid var(--line);border-radius:8px;background:var(--paper)}table{width:100%;border-collapse:collapse;text-align:left}th{padding:10px 13px;background:#f7f9f5;color:var(--muted);font-size:11px;font-weight:700}td{padding:10px 13px;border-top:1px solid #edf0eb;font-size:13px;vertical-align:top}td:first-child{width:27%;font-weight:600}td:nth-child(2){width:17%}.status{display:inline-flex;align-items:center;gap:6px;white-space:nowrap;font-size:11px;font-weight:700}.status:before{width:7px;height:7px;border-radius:50%;background:currentColor;content:""}.status-ok{color:var(--green)}.env-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.env-card{padding:15px 17px;border:1px solid var(--line);border-radius:8px;background:var(--paper)}.env-card h3{margin:0 0 8px;font-size:14px}.env-card p{margin:0;color:var(--muted);font-size:12px}.env-card code,.scope code,td code{font-family:var(--mono);font-size:.92em}.risk-list{display:grid;gap:10px}.risk{display:grid;grid-template-columns:52px 1fr;gap:12px;padding:14px 16px;border:1px solid var(--line);border-radius:8px;background:var(--paper)}.priority{align-self:start;padding:4px 7px;border-radius:4px;background:var(--coral-bg);color:var(--coral);text-align:center;font-size:10px;font-weight:800;letter-spacing:.05em}.priority.p2{background:var(--gold-bg);color:var(--gold)}.risk strong{display:block;margin-bottom:3px;font-size:14px}.risk p{margin:0;color:var(--muted);font-size:12px}.scope{padding:15px 17px;border:1px solid #d4e1e3;border-radius:8px;background:var(--blue-bg);color:#3e5b65;font-size:13px}.scope strong{display:block;margin-bottom:5px;color:#2e535f}.improvements{counter-reset:step;display:grid;gap:9px}.improvement{display:grid;grid-template-columns:28px 1fr;gap:10px;padding:11px 14px;border:1px solid var(--line);border-radius:7px;background:var(--paper)}.improvement:before{counter-increment:step;content:counter(step,decimal-leading-zero);color:var(--green);font:700 12px var(--mono);padding-top:2px}.improvement strong{display:block;margin-bottom:2px;font-size:13px}.improvement p{margin:0;color:var(--muted);font-size:12px}.commands{padding:13px 16px;border-radius:7px;background:#17372e;color:#eaf1e7;font:12px/1.9 var(--mono);white-space:pre-wrap}.footer{display:flex;justify-content:space-between;gap:16px;margin-top:28px;padding-top:14px;border-top:1px solid var(--line);color:var(--muted);font-size:11px}.print-button{position:fixed;right:22px;bottom:22px;padding:10px 14px;border:0;border-radius:6px;background:var(--green);color:white;font:600 12px var(--font);box-shadow:0 5px 18px #20332c2b;cursor:pointer}.print-button:hover{background:var(--green-dark)}
+@media(max-width:720px){.page{width:min(100% - 26px,1050px);margin-top:18px}.masthead{font-size:10px}.hero{padding-top:26px}.hero p{font-size:14px}.metrics{grid-template-columns:1fr 1fr;gap:8px}.metric{min-height:94px;padding:12px}.metric-value{font-size:24px}.section-heading{align-items:flex-start;flex-direction:column;gap:2px}h2{font-size:19px}.panel{overflow-x:auto}table{min-width:640px}.env-grid{grid-template-columns:1fr}.footer{flex-direction:column;gap:4px}.print-button{right:12px;bottom:12px}}
+@media print{@page{size:A4;margin:16mm}body{background:#fff;font-size:11px}.page{width:100%;margin:0}.masthead{padding-bottom:8px}.hero{padding:20px 0 15px}.hero h1{font-size:29px}.hero p{font-size:12px}.metrics{gap:7px;margin-bottom:18px}.metric{min-height:75px;padding:9px 10px}.metric-value{font-size:20px}.metric-note{font-size:9px}section{margin-top:17px}h2{font-size:16px}.panel,.env-card,.risk,.improvement,.scope{break-inside:avoid}td{padding:6px 8px;font-size:10px}th{padding:7px 8px;font-size:9px}.print-button{display:none}.footer{margin-top:18px}}
+</style>
+</head>
+<body>
+<main class="page">
+  <header class="masthead"><div class="brand"><span class="brand-mark">L</span>LibraryMS · Handler 品質改善</div><div class="date">2026-09-30 · 05:19</div></header>
+  <div class="hero"><div class="eyebrow">Backend Quality & Test Report</div><h1>Handler 優化與測試報告</h1><p>擴大後端 handler 行為覆蓋，修正資料庫錯誤映射、列表讀取錯誤與借還資料一致性。</p></div>
+  <div class="summary"><div><strong>結果：核心 handler 覆蓋提升至 74.1%</strong><span>測試由 39.8% 提升 34.3 個百分點。單元測試、build、vet 通過；Race detector 在本機 Windows 無法完成，MySQL 整合仍待驗證。</span></div></div>
+  <div class="metrics" aria-label="測試摘要">
+    <article class="metric"><div class="metric-label">HANDLER 測試</div><div class="metric-value pass">32 / 32</div><div class="metric-note">含 table-driven 子案例</div></article>
+    <article class="metric"><div class="metric-label">STATEMENT COVERAGE</div><div class="metric-value">74.1%</div><div class="metric-note">原基線 39.8%（+34.3 pp）</div></article>
+    <article class="metric"><div class="metric-label">BUILD / VET</div><div class="metric-value pass">通過</div><div class="metric-note">go build ./... · go vet ./...</div></article>
+    <article class="metric"><div class="metric-label">RACE DETECTOR</div><div class="metric-value blocked">未能驗證</div><div class="metric-note">Windows 結束碼 0xc0000139</div></article>
+  </div>
+
+  <section>
+    <div class="section-heading"><h2>本次 handler 改善</h2><span class="section-note">核心檔案：backend/internal/handlers/handlers.go</span></div>
+    <div class="risk-list">
+      <article class="risk"><span class="priority">P1</span><div><strong>借閱改為交易內原子狀態更新</strong><p>只有資料庫成功將書籍由 available 更新為 borrowed 才新增借閱紀錄；檢查 RowsAffected，若被其他請求先借走則回 409 並 rollback。</p></div></article>
+      <article class="risk"><span class="priority">P1</span><div><strong>歸還避免重複成功</strong><p>更新條件限定 returned_at IS NULL，檢查影響列數；併發重複歸還時回 404 並 rollback。</p></div></article>
+      <article class="risk"><span class="priority p2">P2</span><div><strong>修正錯誤分類與請求驗證</strong><p>GetBook/借還查詢區分 sql.ErrNoRows 與資料庫故障；UpdateBook trim 並驗證必要欄位及可用狀態，避免空 status 將借出書籍重設為可借。</p></div></article>
+      <article class="risk"><span class="priority p2">P2</span><div><strong>檢查列舉中的資料庫錯誤</strong><p>ListBooks、ListMembers、ListBorrowRecords 在 rows.Next() 完成後檢查 rows.Err()，避免中斷時仍回傳不完整的 HTTP 200。</p></div></article>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-heading"><h2>新增測試範圍</h2><span class="section-note">backend/internal/handlers/handlers_test.go · go-sqlmock</span></div>
+    <div class="env-grid">
+      <article class="env-card"><h3>讀取、更新與列表</h3><p>GetBook 成功/not found/DB error；UpdateBook 欄位驗證、非法 status 與成功更新；三種列表的正常資料及列舉錯誤。</p></article>
+      <article class="env-card"><h3>借還一致性、統計與路由</h3><p>借閱條件更新成功、失敗 rollback、影響 0 列回 409；歸還重複請求與 DB 錯誤；五種統計 SQL 失敗；routes 與 CORS preflight。</p></article>
+    </div>
+    <div class="scope" style="margin-top:12px"><strong>測試隔離方式</strong><span>全部 handler 測試使用 SQL mock，不連線也不寫入實際 MySQL。測試可驗證 handler 分支、SQL 順序/參數、HTTP status 與交易呼叫；不能取代實際 MySQL 相容性或併發整合測試。</span></div>
+  </section>
+
+  <section>
+    <div class="section-heading"><h2>函式級覆蓋率</h2><span class="section-note">語句覆蓋率以 Go cover profile 計算</span></div>
+    <div class="panel"><table><thead><tr><th>函式</th><th>覆蓋率</th><th>說明</th></tr></thead><tbody>
+      <tr><td>GetBook</td><td><span class="status status-ok">100.0%</span></td><td>成功、not found、DB error 均有測試</td></tr>
+      <tr><td>GetStats</td><td><span class="status status-ok">100.0%</span></td><td>成功及五個 SQL 查詢錯誤</td></tr>
+      <tr><td>SetupRoutes</td><td><span class="status status-ok">95.2%</span></td><td>檢查註冊路由與 CORS OPTIONS</td></tr>
+      <tr><td>ListBooks / ListMembers / ListBorrowRecords</td><td><span class="status status-ok">78.9% 各</span></td><td>正常列表與 rows.Err 分支</td></tr>
+      <tr><td>UpdateBook</td><td><span class="status status-ok">72.4%</span></td><td>欄位、狀態驗證與成功更新</td></tr>
+      <tr><td>ReturnBook</td><td><span class="status status-ok">71.4%</span></td><td>成功、not found、DB error、重複歸還</td></tr>
+      <tr><td>BorrowBook</td><td><span class="status status-ok">62.1%</span></td><td>增加原子更新後仍可補 DB 錯誤分支</td></tr>
+      <tr><td>CreateMember / DeleteBook</td><td><span class="status">56.5% / 61.5%</span></td><td>尚有 DB error、Result error 等分支</td></tr>
+    </tbody></table></div>
+  </section>
+
+  <section>
+    <div class="section-heading"><h2>驗證結果與剩餘工作</h2><span class="section-note">日期：2026-09-30 05:19</span></div>
+    <div class="env-grid">
+      <article class="env-card"><h3>通過</h3><p><code>go test ./... -cover</code>：handler 74.1%；<code>go build ./...</code>、<code>go vet ./...</code> 均通過；Go 檔案診斷無錯誤。</p></article>
+      <article class="env-card"><h3>未完成 / 未涵蓋</h3><p><code>go test -race ./...</code> 以 Windows code <code>0xc0000139</code> 中止，沒有 race 結果。db.Open 初始化仍需隔離 MySQL integration test；config/db package 尚無單元測試。</p></article>
+    </div>
+    <div class="improvements" style="margin-top:12px">
+      <article class="improvement"><div><strong>補 MySQL 初始化整合測試</strong><p>驗證建立資料庫、schema、權限、重新啟動與失敗時 fail fast。</p></div></article>
+      <article class="improvement"><div><strong>提高剩餘分支覆蓋</strong><p>補 CreateMember、DeleteBook、BorrowBook 的 SQL 錯誤、LastInsertId/RowsAffected 錯誤及 scan failure。</p></div></article>
+      <article class="improvement"><div><strong>保留併發和安全驗收</strong><p>在 MySQL integration suite 驗證雙請求競爭；正式部署前另補 API authentication/authorization、CORS allowlist 與最小權限 DB 使用者。</p></div></article>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-heading"><h2>重現指令</h2><span class="section-note">在 backend/ 目錄執行</span></div>
+    <div class="commands">go test ./... -cover
+go test ./internal/handlers -coverprofile=coverage.out
+go tool cover -func=coverage.out
+go build ./...
+go vet ./...
+go test -race ./...  # 本次 Windows 環境未能完成</div>
+  </section>
+  <footer class="footer"><span>LibraryMS · Backend Handler 品質改善</span><span>報告時間 · 2026-09-30 05:19</span></footer>
+</main>
+<button class="print-button" type="button" onclick="window.print()" aria-label="列印或匯出 PDF">列印 / 匯出 PDF</button>
+</body>
+</html>

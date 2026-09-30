@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#17372e">
+<title>LibraryMS Backend | 品質與穩定度檢視</title>
+<style>
+:root{color-scheme:dark;--bg:#10251f;--panel:#17372e;--panel2:#1c4035;--ink:#f0f2e9;--muted:#a8b7aa;--line:#355449;--lime:#b9d977;--coral:#ee916e;--gold:#e9bf70;--blue:#91bac0;--red:#ec8a79;--sans:"Aptos","Segoe UI","Noto Sans TC",sans-serif;--mono:"Cascadia Code","Consolas",monospace}
+*{box-sizing:border-box}html,body{width:100%;height:100%;margin:0;background:#0a1915;color:var(--ink);font-family:var(--sans)}body{display:grid;place-items:center;overflow:hidden}.deck{width:min(100vw,calc(100vh * 16 / 9));height:min(100vh,calc(100vw * 9 / 16));aspect-ratio:16/9;position:relative;overflow:hidden;background:var(--bg);box-shadow:0 24px 100px #0008}.slide{position:absolute;inset:0;display:none;padding:6.2% 7.1% 5.8%;overflow:hidden;background:radial-gradient(ellipse at 100% 0%,#2b4a3a 0,transparent 42%),var(--bg)}.slide.active{display:flex;flex-direction:column;animation:enter .28s ease both}@keyframes enter{from{opacity:.25;transform:translateY(7px)}to{opacity:1;transform:none}}.slide:before{position:absolute;right:-8%;bottom:-28%;width:44%;aspect-ratio:1;border:1px solid #b9d97724;border-radius:50%;content:"";pointer-events:none}.slide:after{position:absolute;right:1.5%;bottom:4%;width:18%;height:1px;background:linear-gradient(90deg,transparent,var(--lime));content:"";opacity:.45}.topline{display:flex;align-items:center;justify-content:space-between;margin-bottom:3.3%;color:var(--muted);font-size:clamp(9px,.82vw,12px);letter-spacing:.13em;text-transform:uppercase}.brand{display:flex;align-items:center;gap:10px;font-weight:700;color:var(--ink)}.brand-mark{width:23px;height:23px;display:grid;place-items:center;border:1px solid #b9d97788;border-radius:6px;color:var(--lime);font-size:12px}.slide-number{font:11px var(--mono);letter-spacing:.06em}.eyebrow{display:flex;align-items:center;gap:9px;color:var(--lime);font-size:clamp(9px,.8vw,12px);font-weight:700;letter-spacing:.14em;text-transform:uppercase}.eyebrow:before{width:20px;height:2px;background:var(--coral);content:""}h1,h2,h3,p{margin-top:0}h1{max-width:820px;margin:4.3% 0 2.5%;font-size:clamp(34px,5.3vw,76px);line-height:1.07;letter-spacing:0;font-weight:700}h2{margin:1.2% 0 2.4%;font-size:clamp(25px,3vw,43px);line-height:1.15;letter-spacing:0}h3{margin:0 0 9px;font-size:clamp(14px,1.4vw,20px);line-height:1.35}.lead{max-width:660px;color:#c2cec1;font-size:clamp(15px,1.65vw,23px);line-height:1.55}.subtle{color:var(--muted)}.foot{position:absolute;left:7.1%;right:7.1%;bottom:3.2%;display:flex;justify-content:space-between;color:#82968a;font-size:10px;letter-spacing:.04em}.cover{justify-content:center}.cover .topline{position:absolute;top:6.2%;left:7.1%;right:7.1%}.cover h1{max-width:740px;margin:20px 0 18px}.cover h1 span{display:block;color:var(--lime)}.cover .lead{max-width:610px}.cover-tag{margin-top:5%;display:flex;gap:8px;align-items:center;color:var(--muted);font-size:12px}.cover-tag b{color:var(--coral)}.cover-aside{position:absolute;right:9%;top:29%;width:23%;color:#b9d977;font:clamp(10px,1vw,14px) var(--mono);line-height:2.1;opacity:.88}.cover-aside i{display:block;width:100%;height:1px;margin:13px 0;background:linear-gradient(90deg,#b9d97777,transparent)}
+.grid{display:grid;gap:13px}.grid.two{grid-template-columns:1fr 1fr}.grid.three{grid-template-columns:repeat(3,1fr)}.grid.four{grid-template-columns:repeat(4,1fr)}.card{position:relative;z-index:1;padding:17px 18px;border:1px solid var(--line);border-radius:8px;background:linear-gradient(150deg,#1b3c32,#163229)}.card p{margin:0;color:#b7c4b8;font-size:clamp(11px,1.08vw,15px);line-height:1.55}.card .mini{margin-bottom:11px;color:var(--muted);font-size:10px;font-weight:700;letter-spacing:.12em}.metric{font-size:clamp(29px,3.7vw,52px);font-weight:700;line-height:1.1}.metric-label{margin-top:8px;color:var(--muted);font-size:clamp(10px,.95vw,13px)}.tone-lime{color:var(--lime)}.tone-coral{color:var(--coral)}.tone-gold{color:var(--gold)}.tone-blue{color:var(--blue)}.statusbar{display:flex;align-items:center;gap:10px;padding:13px 16px;border-left:3px solid var(--coral);background:#ee916e12;color:#f4d1bf;font-size:clamp(12px,1.2vw,16px)}.statusbar.good{border-color:var(--lime);background:#b9d97712;color:#dce9c2}.small{font-size:clamp(10px,.95vw,13px);line-height:1.5}.badge{display:inline-flex;align-items:center;gap:6px;padding:5px 8px;border:1px solid #ee916e66;border-radius:20px;color:#ffc0aa;font-size:10px;font-weight:700;letter-spacing:.07em}.badge:before{width:6px;height:6px;border-radius:50%;background:currentColor;content:""}.badge.p2{border-color:#e9bf7066;color:#f0d391}.badge.pass{border-color:#b9d97766;color:#d4e8a9}.split{display:grid;grid-template-columns:1.08fr .92fr;gap:18px;align-items:stretch}.code{padding:15px 16px;border:1px solid var(--line);border-radius:7px;background:#0b1d18;color:#bdcbbd;font:clamp(9px,.9vw,12px)/1.75 var(--mono);white-space:pre-wrap;overflow-wrap:anywhere}.code .bad{color:#ff9c82}.code .good{color:#cce78c}.flow{display:flex;align-items:stretch;gap:8px;margin-top:13px}.flow-step{flex:1;padding:12px 12px;border:1px solid var(--line);border-radius:6px;background:#17372e;color:#d5dfd2;font-size:clamp(10px,.92vw,13px);line-height:1.45}.flow-arrow{align-self:center;color:var(--coral);font-size:18px}.timeline{display:grid;gap:9px}.timeline-row{display:grid;grid-template-columns:76px 1fr;gap:12px;align-items:start;padding:10px 12px;border-left:2px solid var(--line);background:#ffffff06}.timeline-row strong{color:var(--lime);font:700 11px var(--mono)}.timeline-row span{color:#c0ccc1;font-size:clamp(10px,.95vw,13px);line-height:1.45}.checklist{display:grid;gap:9px}.check{display:flex;align-items:flex-start;gap:10px;color:#d2ddd1;font-size:clamp(11px,1vw,14px);line-height:1.45}.check i{width:17px;height:17px;flex:none;display:grid;place-items:center;border:1px solid #b9d97777;border-radius:50%;color:var(--lime);font:10px var(--mono);font-style:normal}.check.risk i{border-color:#ee916e88;color:var(--coral)}.divider{height:1px;margin:13px 0;background:var(--line)}.recommend{display:grid;grid-template-columns:36px 1fr;gap:11px;align-items:start;padding:12px 0;border-bottom:1px solid var(--line)}.recommend:last-child{border:0}.recommend b{color:var(--lime);font:700 12px var(--mono)}.recommend strong{display:block;margin-bottom:4px;font-size:clamp(12px,1.1vw,15px)}.recommend span{color:var(--muted);font-size:clamp(10px,.9vw,12px);line-height:1.4}.scoreline{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px}.scoreline div{padding:11px 13px;border-top:2px solid var(--line);background:#ffffff06}.scoreline strong{display:block;margin-bottom:4px;font-size:clamp(12px,1vw,14px)}.scoreline span{color:var(--muted);font-size:10px}.nav{position:absolute;z-index:10;right:3.4%;bottom:2.3%;display:flex;align-items:center;gap:9px}.nav button{width:33px;height:30px;border:1px solid #67807188;border-radius:5px;background:#17372e;color:var(--ink);font-size:15px;cursor:pointer}.nav button:hover{border-color:var(--lime);color:var(--lime)}.nav button:disabled{opacity:.38;cursor:default}.count{min-width:51px;color:#a8b7aa;text-align:center;font:10px var(--mono)}.progress{position:absolute;z-index:12;top:0;left:0;height:3px;background:var(--lime);transition:width .2s ease}.print-hint{position:absolute;right:7.1%;bottom:3.2%;color:#82968a;font-size:10px}
+@media(max-width:760px){body{overflow:auto;display:block}.deck{width:100vw;height:100vh;min-height:650px;aspect-ratio:auto}.slide{padding:7% 6% 12%;overflow:auto}.topline{margin-bottom:6%}.slide:before{width:65%}.grid.four{grid-template-columns:1fr 1fr}.grid.three{grid-template-columns:1fr}.grid.two,.split{grid-template-columns:1fr}.cover h1{font-size:42px}.cover-aside{display:none}.cover{justify-content:center}.flow{flex-direction:column}.flow-arrow{transform:rotate(90deg)}.foot{left:6%;right:6%;bottom:3%}.nav{right:4%;bottom:2%}.scoreline{grid-template-columns:1fr}.print-hint{display:none}}
+@media print{@page{size:13.333in 7.5in;margin:0}html,body{width:13.333in;height:auto;overflow:visible;background:#fff}.deck{width:13.333in;height:auto;overflow:visible;box-shadow:none}.slide,.slide:not(.active){position:relative;display:flex!important;width:13.333in;height:7.5in;page-break-after:always;animation:none;-webkit-print-color-adjust:exact;print-color-adjust:exact}.nav,.progress,.print-hint{display:none!important}}
+</style>
+</head>
+<body>
+<div class="deck" role="application" aria-label="Backend 品質檢視簡報">
+<div class="progress" id="progress"></div>
+<section class="slide cover active" aria-label="封面">
+  <div class="topline"><div class="brand"><span class="brand-mark">L</span>LIBRARYMS / ENGINEERING REVIEW</div><span class="slide-number">QUALITY BRIEF · 2026.09</span></div>
+  <div class="eyebrow">Backend quality & reliability</div>
+  <h1>可編譯，<span>還不代表可上線。</span></h1>
+  <p class="lead">圖書館管理系統後端品質與穩定度檢視<br>從建置、資料完整性到營運風險。</p>
+  <div class="cover-tag"><b>檢視日期</b> 2026 年 9 月 30 日 <b>·</b> 範圍 Go API / MySQL / Docker</div>
+  <div class="cover-aside">BUILD / PASS<i></i>TESTS / NONE<i></i>RUNTIME / UNVERIFIED</div>
+  <div class="foot"><span>Library Management System</span><span>01 / 08</span></div>
+</section>
+<section class="slide" aria-label="執行摘要">
+  <div class="topline"><div class="brand"><span class="brand-mark">L</span>EXECUTIVE SUMMARY</div><span class="slide-number">02 / 08</span></div>
+  <div class="eyebrow">Decision snapshot</div><h2>目前狀態：可建置，<span class="tone-coral">營運風險未解除</span></h2>
+  <div class="statusbar">結論　適合開發與整合驗證；在資料庫初始化、借閱一致性與 API 存取控制補強前，不建議部署到正式環境。</div>
+  <div class="grid four" style="margin-top:16px">
+    <article class="card"><div class="mini">BUILD</div><div class="metric tone-lime">PASS</div><div class="metric-label">go test / build / vet</div></article>
+    <article class="card"><div class="mini">TEST COVERAGE</div><div class="metric tone-coral">0</div><div class="metric-label">backend 測試檔案</div></article>
+    <article class="card"><div class="mini">P1 RISKS</div><div class="metric tone-gold">3</div><div class="metric-label">schema、競態、存取控制</div></article>
+    <article class="card"><div class="mini">RUNTIME</div><div class="metric tone-blue">OPEN</div><div class="metric-label">DB / Compose 未整合驗證</div></article>
+  </div>
+  <div class="scoreline"><div><strong>功能面　基礎 API 已齊</strong><span>圖書 CRUD、讀者建立、借還、統計</span></div><div><strong>資料面　一致性不足</strong><span>初始化失敗不阻止服務啟動；交易前檢查</span></div><div><strong>維運面　缺少保護網</strong><span>沒有自動化測試、健康檢查與啟動等待</span></div></div>
+  <div class="foot"><span>評估依據：目前 workspace 程式碼與本機 Go 驗證</span><span>02 / 08</span></div>
+</section>
+<section class="slide" aria-label="功能範圍">
+  <div class="topline"><div class="brand"><span class="brand-mark">L</span>CAPABILITY MAP</div><span class="slide-number">03 / 08</span></div>
+  <div class="eyebrow">What exists today</div><h2>功能骨架完整，邊界還沒補齊</h2>
+  <div class="grid two">
+    <article class="card"><div class="mini">已實作 API</div><div class="checklist">
+      <div class="check"><i>✓</i><span>書籍：列表、單筆、建立、更新、刪除</span></div>
+      <div class="check"><i>✓</i><span>讀者：列表、建立</span></div>
+      <div class="check"><i>✓</i><span>借閱、歸還、借閱紀錄與館務統計</span></div>
+      <div class="check"><i>✓</i><span>MySQL 持久化與 Docker backend image</span></div>
+    </div></article>
+    <article class="card"><div class="mini">待補能力</div><div class="checklist">
+      <div class="check risk"><i>!</i><span>讀者更新/刪除 API、ISBN 唯一性與查詢分頁</span></div>
+      <div class="check risk"><i>!</i><span>登入授權、角色與 API 存取限制</span></div>
+      <div class="check risk"><i>!</i><span>資料庫 migration、備份/還原策略</span></div>
+      <div class="check risk"><i>!</i><span>HTTP/API 與資料庫整合測試</span></div>
+    </div></article>
+  </div>
+  <div class="divider"></div>
+  <p class="small subtle">路由集中於 <code>internal/handlers/handlers.go</code>；目前沒有獨立 service/repository 層。小型原型可接受，擴充前應先補測試與資料完整性約束。</p>
+  <div class="foot"><span>功能完整度 ≠ 營運成熟度</span><span>03 / 08</span></div>
+</section>
+<section class="slide" aria-label="資料庫啟動風險">
+  <div class="topline"><div class="brand"><span class="brand-mark">L</span>CRITICAL · DATABASE BOOTSTRAP</div><span class="slide-number">04 / 08</span></div>
+  <div class="eyebrow">P1 · 啟動後可能沒有 schema</div><h2>初始化錯誤被吞掉，服務仍回報啟動</h2>
+  <div class="split">
+    <div>
+      <div class="code"><span class="bad">db.Exec(`CREATE books; CREATE members; CREATE borrow_records;`)</span>
+if err != nil {
+    log.Println("schema setup warning:", err)
+    <span class="bad">// 繼續回傳 database, nil</span>
+}
+return database, nil</div>
+      <div class="flow"><div class="flow-step">driver 預設不允許多 statements</div><span class="flow-arrow">→</span><div class="flow-step">DDL 執行失敗但只記 warning</div><span class="flow-arrow">→</span><div class="flow-step">服務啟動，資料 API 才回 500</div></div>
+    </div>
+    <article class="card"><div class="mini">影響</div><h3 class="tone-coral">新環境容易「健康但不可用」</h3><p>Compose 建立空資料庫時，三張資料表可能沒有被建立。`/api/health` 只回靜態 OK，無法證明 schema 可用。</p><div class="divider"></div><div class="mini">修復方向</div><p>以版本化 migration 或逐條 DDL 初始化；任何 schema 錯誤都要讓啟動失敗。另設 readiness 檢查確認 DB 與必要表存在。</p><div class="divider"></div><p class="small subtle">證據：<code>internal/db/db.go</code> · Open()</p></article>
+  </div>
+  <div class="foot"><span>優先級：先修，否則新環境無法可靠啟動</span><span>04 / 08</span></div>
+</section>
+<section class="slide" aria-label="借閱資料一致性">
+  <div class="topline"><div class="brand"><span class="brand-mark">L</span>CRITICAL · DATA CONSISTENCY</div><span class="slide-number">05 / 08</span></div>
+  <div class="eyebrow">P1 · 借閱併發競態</div><h2>檢查在交易外，兩筆請求都可能借出同一本書</h2>
+  <div class="flow" style="margin-top:4px">
+    <div class="flow-step"><b class="tone-gold">請求 A</b><br>讀到 available</div><span class="flow-arrow">↘</span>
+    <div class="flow-step"><b class="tone-coral">時間交錯</b><br>A、B 都完成狀態檢查</div><span class="flow-arrow">↙</span>
+    <div class="flow-step"><b class="tone-blue">請求 B</b><br>也讀到 available</div>
+  </div>
+  <div class="grid two" style="margin-top:13px">
+    <article class="card"><div class="mini">目前流程</div><div class="code">SELECT book.status  <span class="bad">// transaction 外</span>
+BEGIN
+INSERT borrow_records
+UPDATE books SET status='borrowed'
+COMMIT</div><p style="margin-top:10px">狀態更新沒有 `WHERE status='available'` 條件，也沒有檢查 RowsAffected；資料庫沒有唯一約束阻止重複的 active loan。</p></article>
+    <article class="card"><div class="mini">建議流程</div><div class="code"><span class="good">BEGIN</span>
+UPDATE books SET status='borrowed'
+WHERE id=? AND status='available'
+<span class="good">檢查 RowsAffected = 1</span>
+INSERT borrow_records
+<span class="good">COMMIT</span></div><p style="margin-top:10px">或在交易內 `SELECT ... FOR UPDATE`；加上 active loan 的資料約束，並以併發測試驗證唯一性。</p></article>
+  </div>
+  <div class="foot"><span>證據：BorrowBook() 中狀態查詢先於 Begin()</span><span>05 / 08</span></div>
+</section>
+<section class="slide" aria-label="安全與錯誤處理">
+  <div class="topline"><div class="brand"><span class="brand-mark">L</span>CRITICAL · SECURITY & API</div><span class="slide-number">06 / 08</span></div>
+  <div class="eyebrow">P1 / P2 · 上線前需補</div><h2>管理型 API 尚未建立安全邊界</h2>
+  <div class="grid two">
+    <article class="card"><div class="mini">正式環境阻擋</div><div class="checklist">
+      <div class="check risk"><i>!</i><span>所有路由無認證/授權 middleware；任何可連線者都能操作館藏與借還。</span></div>
+      <div class="check risk"><i>!</i><span>CORS 使用 `Access-Control-Allow-Origin: *`，Compose 對外暴露 API 與 MySQL port。</span></div>
+      <div class="check risk"><i>!</i><span>Compose 以 root 帳號與明文弱密碼連線；應改成最小權限 DB 帳號與環境 secret。</span></div>
+    </div></article>
+    <article class="card"><div class="mini">可靠性與 API 語意</div><div class="checklist">
+      <div class="check risk"><i>!</i><span>`GetBook` 將所有 SQL 錯誤都回成 404，資料庫故障會被誤報成不存在。</span></div>
+      <div class="check risk"><i>!</i><span>列表迴圈沒有檢查 `rows.Err()`；讀取中斷可能仍回傳不完整的 200 結果。</span></div>
+      <div class="check risk"><i>!</i><span>UpdateBook 缺少欄位驗證；status 空值會重設為 available，可能覆寫借閱狀態。</span></div>
+    </div></article>
+  </div>
+  <div class="divider"></div><p class="small subtle">另需限制 CORS 來源、隱藏內部 SQL 錯誤細節、設定 request/DB timeout，並將 HTTP status 與資料庫錯誤正確分類。</p>
+  <div class="foot"><span>證據：handlers.go · CORS / GetBook / UpdateBook / list handlers</span><span>06 / 08</span></div>
+</section>
+<section class="slide" aria-label="營運與測試缺口">
+  <div class="topline"><div class="brand"><span class="brand-mark">L</span>OPERATIONS & TESTING</div><span class="slide-number">07 / 08</span></div>
+  <div class="eyebrow">P2 · 穩定度的保護網</div><h2>目前通過的是編譯，不是行為驗證</h2>
+  <div class="split">
+    <article class="card"><div class="mini">已執行驗證</div><div class="checklist">
+      <div class="check"><i>✓</i><span><code>go test ./...</code>：所有 package 編譯通過</span></div>
+      <div class="check"><i>✓</i><span><code>go build ./...</code>：建置通過</span></div>
+      <div class="check"><i>✓</i><span><code>go vet ./...</code>：無靜態分析輸出</span></div>
+      <div class="check risk"><i>!</i><span>未找到 `_test.go`；Go test 顯示各 package `[no test files]`</span></div>
+      <div class="check risk"><i>!</i><span>Docker CLI 不可用，未能驗證 image / Compose / MySQL 初始化</span></div>
+    </div></article>
+    <article class="card"><div class="mini">部署可靠性</div><div class="checklist">
+      <div class="check risk"><i>!</i><span>Compose 只用 `depends_on`，沒有 DB healthcheck 或 backend retry；MySQL 尚未 ready 時後端直接退出。</span></div>
+      <div class="check risk"><i>!</i><span>沒有 graceful shutdown、request timeout、migration/rollback、備份與 restore 演練。</span></div>
+      <div class="check risk"><i>!</i><span>Health endpoint 不檢查資料庫狀態，不能作為 readiness probe。</span></div>
+      <div class="check risk"><i>!</i><span>沒有分頁/查詢限制，資料量增加時列表與統計成本會持續上升。</span></div>
+    </div></article>
+  </div>
+  <div class="foot"><span>本次 runtime integration 尚未驗證；勿將 build pass 當成 release sign-off</span><span>07 / 08</span></div>
+</section>
+<section class="slide" aria-label="改善路線圖">
+  <div class="topline"><div class="brand"><span class="brand-mark">L</span>RECOMMENDED ROADMAP</div><span class="slide-number">08 / 08</span></div>
+  <div class="eyebrow">先解除上線阻擋，再擴充功能</div><h2>四步把可編譯推進到可營運</h2>
+  <div class="timeline">
+    <div class="timeline-row"><strong>01 · P0</strong><span><b>Schema / startup：</b>拆分 DDL 或加入正式 migration；初始化錯誤 fail fast；加 DB readiness 與啟動 retry。</span></div>
+    <div class="timeline-row"><strong>02 · P1</strong><span><b>一致性：</b>借閱狀態更新改成原子條件更新或 row lock；補 active loan 約束；修正歸還冪等性。</span></div>
+    <div class="timeline-row"><strong>03 · P1</strong><span><b>安全：</b>加入認證/角色授權；CORS allowlist；DB 使用最小權限帳號，憑證從 secret 注入。</span></div>
+    <div class="timeline-row"><strong>04 · P2</strong><span><b>品質門檻：</b>補 handler + MySQL 整合測試、併發借閱測試；檢查 rows.Err、欄位驗證、分頁與錯誤映射。</span></div>
+  </div>
+  <div class="statusbar good" style="margin-top:15px">建議上線門檻：乾淨資料 volume 可啟動、健康檢查含 DB、核心借還測試通過、未授權請求被拒絕。</div>
+  <div class="foot"><span>後續可依此路線逐項修復並重新驗收</span><span>08 / 08</span></div>
+</section>
+<div class="nav" aria-label="簡報控制"><button id="prev" type="button" aria-label="上一張">←</button><span class="count" id="count">01 / 08</span><button id="next" type="button" aria-label="下一張">→</button></div>
+<div class="print-hint">← → 翻頁　·　P 列印 / 匯出 PDF</div>
+</div>
+<script>
+const slides=[...document.querySelectorAll('.slide')];let current=0;const progress=document.getElementById('progress');const count=document.getElementById('count');const prev=document.getElementById('prev');const next=document.getElementById('next');
+function show(index){current=Math.max(0,Math.min(slides.length-1,index));slides.forEach((slide,i)=>{slide.classList.toggle('active',i===current);slide.setAttribute('aria-hidden',i===current?'false':'true')});count.textContent=`${String(current+1).padStart(2,'0')} / ${String(slides.length).padStart(2,'0')}`;progress.style.width=`${((current+1)/slides.length)*100}%`;prev.disabled=current===0;next.disabled=current===slides.length-1;document.title=`${String(current+1).padStart(2,'0')} · Backend 品質與穩定度檢視`}
+prev.addEventListener('click',()=>show(current-1));next.addEventListener('click',()=>show(current+1));document.addEventListener('keydown',event=>{if(['ArrowRight','PageDown',' '].includes(event.key)){event.preventDefault();show(current+1)}else if(['ArrowLeft','PageUp'].includes(event.key)){event.preventDefault();show(current-1)}else if(event.key.toLowerCase()==='p'){window.print()}else if(event.key==='Home'){show(0)}else if(event.key==='End'){show(slides.length-1)}});show(0);
+</script>
+</body>
+</html>
